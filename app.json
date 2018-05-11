@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/component/component",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -11,6 +12,24 @@
     "navigationBarTextStyle":"white",
     "enablePullDownRefresh":true,
     "onReachBottomDistance":50
+  },
+  "tabBar":{
+    "color":"#000",
+    "selectedColor":"#ff7f50",
+    "backgroundColor":"#fff",
+    "borderStyle":"black",
+    "list":[
+      {
+        "text":"首页",
+        "pagePath":"pages/index/index"
+      },{
+        "text":"组件",
+        "pagePath":"pages/component/component"
+      },{
+        "text":"日志",
+        "pagePath":"pages/logs/logs"
+      }
+    ]
   },
   "debug":true
 }

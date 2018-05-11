@@ -5,7 +5,7 @@
 App({
   // 生命周期函数，监听小程序初始化，当小程序初始化完成时触发，全局只触发一次
   onLaunch: function () {
-    //小程序并不是运行在浏览器中的，所以并没有window和document的概念
+    // 小程序并不是运行在浏览器中的，所以并没有window和document的概念
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -14,8 +14,8 @@ App({
     // 登录
     wx.login({
       success:(res) => {
-        console.log(res)
-      }
+        // console.log(res)
+    }
     })
 
     // 获取用户信息
@@ -26,7 +26,7 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res)
+              // console.log(res)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 
@@ -47,6 +47,7 @@ App({
   onHide:function () {
     console.log('隐藏小程序时执行')
   },
+  // 全局属性
   globalData: {
     userInfo: null
   }
