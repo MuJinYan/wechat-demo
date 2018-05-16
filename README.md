@@ -335,7 +335,7 @@ touch 用户划动引起swiper变化；
 > * `bindcancel`	 取消选择时触发  1.9.90+
 > * `disabled`  false	是否禁用
 
-#####picker-view
+##### picker-view
 > * 嵌入页面的滚动选择器，自定义滚动选择器
 > * 由`<picker-view/>`和`<picker-view-column/>`构成
 > * `<picker-view/>`中仅可放置`<picker-view-column/>`，其他节点不会显示。`<picker-view-column/>`创造列,其孩子节点的高度会自动设置成与picker-view的选中框的高度一致
@@ -347,7 +347,7 @@ touch 用户划动引起swiper变化；
 > * `mask-class`	 设置蒙层的类名 1.5.0+
 > * `bindchange`	 当滚动选择，value 改变时触发 change 事件，`event.detail = {value: value}`；value为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项（下标从 0 开始）
 
-#####input
+##### input
 > * `value` 输入框的初始内容
 > * `type`	 input 的类型
 >   * `text`	   文本输入键盘
@@ -383,7 +383,7 @@ touch 用户划动引起swiper变化；
 > * input 组件是一个 native 组件，字体是系统字体，**所以无法设置 font-family；**
 > * 在 input 聚焦期间，避免使用 css 动画；
 
-#####textarea
+##### textarea
 > * 自闭和标签，值需要赋值给value属性，而不是被标签包裹
 > * `value`	 输入框的内容
 > * `placeholder`	 输入框为空时占位符
@@ -407,7 +407,7 @@ touch 用户划动引起swiper变化；
 > * `bindinput	`	当键盘输入时，触发 input 事件，`event.detail = {value, cursor}`， **bindinput 处理函数的返回值并不会反映到 textarea 上**
 > * `bindconfirm`	 点击完成时， 触发 confirm 事件，`event.detail = {value: value}`
 
-#####button
+##### button
 > * 当`<button/>`被`<form/>`包裹时，可以通过设置`form-type`属性触发表单对应的事件
 > * `size`	按钮的大小 default	mini
 > * `type`	按钮的样式类型	primary default warn
@@ -441,14 +441,14 @@ touch 用户划动引起swiper变化；
 > * 在`bindgetphonenumber` 等返回加密信息的回调中调用 `wx.login `登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态。
 > *  `<button><image src=""/></button>`可以这样写嵌套多媒体的自定义按钮
 
-#####form
+##### form
 > * 表单，将组件内的用户输入的`<switch/>` `<input/>` `<checkbox/>` `<slider/>` `<radio/>` `<picker/>` 提交。
 > * 当点击 `<form/>` 表单中 formType 为 submit 的 `<button/>` 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
 > * `report-submit`	 是否返回 formId 用于发送模板消息
 > * `bindsubmit`	携带 form 中的数据触发 submit 事件，`event.detail = {value : {'name': 'value'} , formId: ''}	`
 > * `bindreset`	表单重置时会触发 reset 事件
 
-####navigator 导航
+#### navigator 导航
 > * 页面链接  类似于a标签 控制页面的跳转
 > * `url`	应用内的跳转链接
 > * `open-type`	跳转方式
