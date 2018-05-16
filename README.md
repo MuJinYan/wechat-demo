@@ -409,4 +409,61 @@ touch 用户划动引起swiper变化；
 
 #####button
 > * 当`<button/>`被`<form/>`包裹时，可以通过设置`form-type`属性触发表单对应的事件
+> * `size`	按钮的大小 default	mini
+> * `type`	按钮的样式类型	primary default warn
+> * `plain`	 false  按钮是否镂空，背景色透明
+> * `disabled`	 false	是否禁用
+> * `loading`	 false	名称前是否带 loading 图标
+> * `form-type	`  用于 <form/> 组件，点击分别会触发 <form/> 组件的 submit/reset 事件	`submit` 提交表单 `reset` 重置表单
+> * `open-type	`  微信开放能力	 1.1.0
+>   * `contact`	打开客服会话	1.1.0
+>   * `share`	触发用户转发 1.2.0
+>   * `getUserInfo`	获取用户信息，可以从bindgetuserinfo回调中获取到用户信息	1.3.0
+>   * `getPhoneNumber`	获取用户手机号，可以从bindgetphonenumber回调中获取到用户信息，具体说明	1.2.0
+>   * `launchApp` 	打开APP，可以通过app-parameter属性设定向APP传的参数具体说明	1.9.5
+> * `hover-class`  指定按钮按下去的样式类。当 `hover-class="none"` 时，没有点击态效果，默认值 button-hover
+> * `hover-stop-propagation`	 false 指定是否阻止本节点的祖先节点出现点击态		1.5.0
+> * `hover-start-time`	 按住后多久出现点击态，单位毫秒
+> * `hover-stay-time`	手指松开后点击态保留时间，单位毫秒
+> * `lang`	 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。	生效机制：`open-type="getUserInfo"`	1.3.0
+> * `bindgetuserinfo`	用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致	生效机制：`open-type="getUserInfo"` 1.3.0
+> * `session-from	` 会话来源	 生效机制：`open-type="contact""`	1.4.0
+> * `send-message-title`	当前标题	会话内消息卡片标题	生效机制：`open-type="contact"`	1.5.0
+> * `send-message-path`	当前分享路径	会话内消息卡片点击跳转小程序路径	生效机制：`open-type="contact"`	1.5.0
+> * `send-message-img`	 会话内消息卡片图片	生效机制：`open-type="contact"`	1.5.0
+> * `show-message-card` false	显示会话内消息卡片	生效机制：`open-type="contact"`	1.5.0
+> * `bindcontact` 客服消息回调	生效机制：`open-type="contact"`	1.5.0
+> * `bindgetphonenumber`	获取用户手机号回调	生效机制：`open-type="getphonenumber"`	1.2.0
+> * `app-parameter`	打开 APP 时，向 APP 传递的参数	生效机制：`open-type="launchApp"`	1.9.5
+> * `binderror	`  当使用开放能力时，发生错误的回调	生效机制：`open-type="launchApp"`	1.9.5
+> * `button-hover` 默认为`{background-color: rgba(0, 0, 0, 0.1); opacity: 0.7;}`
+> * `bindgetphonenumber` 从1.2.0 开始支持，但是在1.5.3以下版本中无法使用wx.canIUse进行检测，建议使用基础库版本进行判断。
+> * 在`bindgetphonenumber` 等返回加密信息的回调中调用 `wx.login `登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态。
+> *  `<button><image src=""/></button>`可以这样写嵌套多媒体的自定义按钮
+
+#####form
+> * 表单，将组件内的用户输入的`<switch/>` `<input/>` `<checkbox/>` `<slider/>` `<radio/>` `<picker/>` 提交。
+> * 当点击 `<form/>` 表单中 formType 为 submit 的 `<button/>` 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
+> * `report-submit`	 是否返回 formId 用于发送模板消息
+> * `bindsubmit`	携带 form 中的数据触发 submit 事件，`event.detail = {value : {'name': 'value'} , formId: ''}	`
+> * `bindreset`	表单重置时会触发 reset 事件
+
+####navigator 导航
+> * 页面链接  类似于a标签 控制页面的跳转
+> * `url`	应用内的跳转链接
+> * `open-type`	跳转方式
+>   * `navigate`	对应 wx.navigateTo 的功能
+>   * `redirect`	对应 wx.redirectTo 的功能
+>   * `switchTab`	对应 wx.switchTab 的功能
+>   * `reLaunch`	对应 wx.reLaunch 的功能	1.1.0
+>   * `navigateBack`	对应 wx.navigateBack 的功能	1.1.0
+> * `delta`  当 open-type 为 'navigateBack' 时有效，表示回退的层数
+> * `hover-class`	  默认值：navigator-hover	指定点击时的样式类，当hover-class="none"时，没有点击态效果
+> * `hover-stop-propagation`	false	指定是否阻止本节点的祖先节点出现点击态	1.5.0
+> * `hover-start-time`	按住后多久出现点击态，单位毫秒
+> * `hover-stay-time`	手指松开后点击态保留时间，单位毫秒
+> * `navigator-hover` 默认为 `{background-color: rgba(0, 0, 0, 0.1); opacity: 0.7;}`, <navigator/> 的子节点背景色应为透明色
+
+
+
 
