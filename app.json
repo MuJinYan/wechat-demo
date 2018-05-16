@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/component/component",
+    "pages/picker/picker",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -28,6 +29,9 @@
       },{
         "text":"日志",
         "pagePath":"pages/logs/logs"
+      },{
+        "text":"picker",
+        "pagePath":"pages/picker/picker"
       }
     ]
   },

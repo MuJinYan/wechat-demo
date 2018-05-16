@@ -161,11 +161,12 @@
 ### 组件
 > * 组件的属性名都是小写，以`-`连接
 > * 组件属性分为所有组件都有的共同属性和组件自定义的特殊属性
-> * 共同属性：`id` `class` `style` `hidden` `data-*`(自定义属性，组件上触发事件时，会发送给事件处理函数，事件处理函数可以通过`datascl`获取) `bind*/catch*`
+> * 共同属性：`id` `class` `style` `hidden` `data-*`(自定义属性，组件上触发事件时，会发送给事件处理函数，事件处理函数可以通过`dataset`获取) `bind*/catch*`
 
 #### view组件
 > * `hover` 是否启动点击态 默认值为false
 > * `hover-class` 指定按下去的样式，当`hover-class="none"`时，没有点击效果，默认值为none
+> * `hover-stop-propagation`  指定是否阻止本节点的祖先节点出现点击态	1.5.0+支持 默认值false
 > * `hover-start-time` 按住后多久出现点击态，单位毫秒，默认值50
 > * `hover-stay-time` 手指松开后点击态保留时间，单位毫秒，默认值400
 
@@ -178,22 +179,234 @@
 > * `scroll-top` 设置竖向滚动条位置
 > * `scroll-left` 设置横向滚动条位置
 > * `scroll-into-view` 值应为某子元素id,滚动到该元素时，元素顶部对齐滚动区域顶部
+> * `scroll-with-animation` 在设置滚动条位置时使用动画过渡
+> * `enable-back-to-top` iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向  默认值false
 > * `bindscrolltoupper` 滚动到顶部/左边 触发`scrolltoupper`事件
 > * `bindscrolltolower` 滚动到底部/右边 触发`scrolltolower`事件
 > * `bindscroll` 滚动时触发 `event.detail = {scrollLeft,scrollTop,scrollHeight,scrollWidth,deltaX,deltaY}`
 > * `<textarea />` `<video/>` `<map/>` `<convas>` 不能再`<scroll-view/>`中使用
 > * 使用纵向滚动时，需要给`<scroll-view/>`一个固定高度
+> * `scroll-into-view` 的优先级高于 `scroll-top`
+> * 在滚动 `scroll-view` 时会阻止页面回弹，所以在 `scroll-view` 中滚动，是无法触发 `onPullDownRefresh`,若要使用下拉刷新，请使用页面的滚动，而不是`scroll-view`
 
 #### 滑动视图组件(<swiper/>和<swiper-item/>组成)
 > * `<swiper-item/>` 内部能放置任何组件，默认宽高自动设置为100%
 > * `<swiper/>`属性
 >   * `indicator-dots` 是否显示面板指示点，默认为false
+>   * `indicator-color` 指示点的颜色，1.1.0+支持
+>   * `indicator-active-color` 当前选中的指示点颜色，1.1.0+支持
 >   * `autoplay` 是否自动切换，默认为false
 >   * `current` 当前所在页面的index,默认为0
+>   * `current-item-id` 当前所在滑块的`item-id`,不能与`current`被同时指定  1.9.0+支持，值类型string
 >   * `interval` 自动切换时间间隔，默认为5000
->   * `duration` 滑动动画时长，默认为1000
+>   * `duration` 滑动动画时长，默认为500
 >   * `circular` 是否采用衔接滑动，默认为false
->   * `bindchange` current改变时会触发change事件，`event.detail={current:current}`
+>   * `vertical` 滑动方向是否为纵向
+>   * `previous-margin` 前边距，可用于露出前一项的一小部分，接受 px 和 rpx 值 1.9.0+ string("0px")
+>   * `next-margin` 后边距，可用于露出后一项的一小部分，接受 px 和 rpx 值 1.9.0+ string("0px")
+>   * `display-multiple-items` 同时显示的滑块数量 1.9.0+
+>   * `skip-hidden-item-layout` 是否跳过未显示的滑块布局，设为 true 可优化复杂情况下的滑动性能，但会丢失隐藏状态滑块的布局信息 1.9.0+
+>   * `bindchange` current改变时会触发change事件，`event.detail={current: current, source: source}`
+>   * `bindanimationfinish`  	动画结束时会触发 animationfinish 事件，event.detail 同上  1.9.0+
+>   * 从1.4.0开始，`change`事件返回`detail`包含一个`source`字段，表示导致变更的原因 （autoplay 自动播放导致swiper变化；
+touch 用户划动引起swiper变化；
+其他原因将用空字符串表示。）
+>   * `swiper-item` 属性`item-id` 该 swiper-item 的标识符 1.9.0+  string
+> * 如果在 bindchange 的事件回调函数中使用 setData 改变 current 值，则有可能导致 setData 被不停地调用，因而通常情况下请在改变 current 值前检测 source 字段来判断是否是由于用户触摸引起
 
+#### 基础组件
+##### icon
+> * `type` icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear
+> * `size` icon的大小，单位px `size="40"`并不用写px
+> * `color` icon的颜色，同css的color
+> * 自定义`<icon/>`组件 使用雪碧图的方式进行实现，也就是`background-image`和`background-position`进行组合实现
 
+##### text
+> * 用于文本内容的展示。只有`<text/>`节点内部的内容能被长按选中
+> * 行内元素，文本中的内容支持转义字符
+> * 只支持`<text/>`嵌套
+> * 属性
+>   * `selectable` 文本是否可选，默认false ,1.1.0+
+>   * `space` 显示连续空格 1.4.0+  `ensp`	中文字符空格一半大小
+`emsp`	中文字符空格大小
+`nbsp`	根据字体设置的空格大小
+>   * `decode`  是否解码，默认false 1.4.0+
+>   * `decode`可以解析的有 `&nbsp;` `&lt;` `&gt;` `&amp;` `&apos;``&ensp;` `&emsp;`
+
+##### progress
+> * 显示进度状态
+> * 块级元素
+> * 属性
+>   * `percent` 当前进度占所有进度的百分比，取值0-100
+>   * `show-info` 是否在进度条右侧显示百分比，默认false
+>   * `stroke-width` 进度条线的宽度，单位px，默认值6
+>   * `color` 进度条颜色，默认值#09BB07
+>   * `active` 渲染时时候开启进度条从左到右的动画，默认false。开启后每次修改`percent`触发进度条重新渲染，都会从左到右显示动画
+>   * `activeColor` 已选择的进度条的颜色
+>   * `backgroundColor` 未选择的进度条的颜色
+>   * `active-mode` backwards: 动画从头播；forwards：动画从上次结束点接着播 1.7.0+
+
+##### radio-group和radio
+> * `<radio/>`的选中态不能直接获取，需要通过`<radio-group/>`的`change`事件捕获
+> * `<radio-group/>` 可以包含其他标签，会仅对`<radio/>`产生影响
+> * `bindchange` 绑定`<radio-group/>`的`change`事件，当选中项发生变化时触发，`event.detail={value:选中项radio的value}`
+> * `<radio/>`的属性
+>   * `value` `<radio/>`的标识，当选中时，`change`事件会携带`<radio/>`的`value`
+>   * `checked` 当前`<radio/>`是否选中，在一个`<radio-group/>`内只能有一个`<radio/>`的`checked`是true。设置多个，默认选中最后一个为true的单选项。默认为false
+>   * `disabled` 是否禁用 禁用后不能点击 默认false
+>   * `color` 颜色
+
+##### checkbox-group和checkbox
+> * `bindchange`	`<checkbox-group/>`中选中项发生改变是触发 `change` 事件，`event.detail = {value:[选中的checkbox的value的数组]}`
+> * `<checkbox/>`的属性
+>   * `value` `<checkbox/>`的标识，当选中时，`change`事件会携带`<checkbox/>`的`value`
+>   * `checked` 当前`<checkbox/>`是否选中,可用来设置默认选中,允许多个`<checkbox/>`的`checked`为true
+>   * `disabled` 是否禁用 禁用后不能点击 默认false
+>   * `color` 颜色
+
+##### switch
+> * `checked` 是否选中，默认为false
+> * `type` 样式，有效值：switch, checkbox
+> * `bindchange`	 `checked` 改变时触发 `change` 事件，`event.detail={ value:checked}`
+
+##### label
+> * 用来改进表单组件的可用性，使用for属性找到对应的id，或者将控件放在该标签下，当点击时，就会触发对应的控件。
+> * for优先级高于内部控件，内部有多个控件的时候默认触发第一个控件。
+> * 目前可以绑定的控件有：`<button/>`,`<checkbox/>`, `<radio/>`, `<switch/>`
+
+##### slider
+> * 小程序只提供了水平形式的滑动选择器
+> * `min` 最小值	默认值0
+> * `max	` 最大值  默认值100
+> * `step` 步长，取值必须大于 0，并且可被(max - min)整除 默认值1
+> * `disabled` 是否禁用
+> * `value` 当前取值
+> * `color` 背景条的颜色（请使用 backgroundColor）
+> * `selected-color` 已选择的颜色（请使用 activeColor）
+> * `activeColor` 已选择的颜色
+> * `backgroundColor` 背景条的颜色
+> * `block-size` 滑块的大小，取值范围为 12 - 28  1.9.0+
+> * `block-color` 滑块的颜色  1.9.0+
+> * `show-value` 是否显示当前 value
+> * `bindchange` 完成一次拖动后触发的事件，`event.detail = {value: value}`
+> * `bindchanging` 拖动过程中触发的事件，`event.detail = {value: value}` 1.7.0+
+
+##### picker
+> * 从底部弹起的滚动选择器，现支持五种选择器，通过mode来区分，分别是普通选择器，多列选择器，时间选择器，日期选择器，省市区选择器，默认是普通选择器。
+
+> ###### 普通选择器：mode = selector
+>  * `range` `mode`为 `selector` 或 `multiSelector`时，`range` 有效
+> * `range-key` 当 `range` 是一个 `Object Array` 时，通过 `range-key`来指定 `Object` 中 `key` 的值作为选择器显示内容
+> * `value`	 `value` 的值表示选择了 `range` 中的第几个（下标从 0 开始）	可以用来设置默认值
+> * `bindchange`	`value` 改变时触发 `change` 事件，`event.detail = {value: value}`
+> * `disabled`	 是否禁用	默认值false
+> * `bindcancel`	取消选择或点遮罩层收起 picker 时触发	1.9.90+
+
+> ###### 多列选择器：mode = multiSelector（最低版本：1.4.0）
+> * `range`	 []	mode为 selector 或 multiSelector 时，range 有效。二维数组，长度表示多少列，数组的每项表示每列的数据，如[["a","b"], ["c","d"]]
+> * `range-key	` 当 range 是一个 二维Object Array 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容	string  e.g.`range="{{objectArray}}" range-key="name"`
+> * `value`	 value 每一项的值表示选择了 range 对应项中的第几个（下标从 0 开始）
+> * `bindchange` value 改变时触发 change 事件，`event.detail = {value: value}`,value是一个数组，长度是二维数组的长度，每一项表示每一列选中的项目的索引，当点击确定时触发
+> * `bindcolumnchange` 某一列的值改变时触发 `columnchange` 事件，`event.detail = {column: column, value: value}`，column 的值表示改变了第几列（下标从0开始），value 的值表示变更值的下标 (下标从0开始)
+> * `bindcancel`	 取消选择时触发	1.9.90+
+> * `disabled`	false	是否禁用
+
+> ###### 时间选择器：mode = time
+> * `value` 表示选中的时间，格式为"hh:mm"
+> * `start`	表示有效时间范围的开始，字符串格式为"hh:mm"
+> * `end`	表示有效时间范围的结束，字符串格式为"hh:mm"
+> * `bindchange`	 value 改变时触发 change 事件，`event.detail = {value: value}`
+> * `bindcancel`	 取消选择时触发 1.9.90+
+> * `disabled` false	是否禁用
+
+> ###### 日期选择器：mode = date
+> * `value`	 表示选中的日期，格式为"YYYY-MM-DD
+> * `start`	 表示有效日期范围的开始，字符串格式为"YYYY-MM-D
+> * `end`	 表示有效日期范围的结束，字符串格式为"YYYY-MM-DD"
+> * `fields	` 有效值 year,month,day，表示选择器的粒度  默认值day
+> * `bindchange`	改变时触发 change 事件，`event.detail = {value: value}`
+> * `bindcancel`	取消选择时触发  1.9.90+
+> * `disabled`	  false	是否禁用
+
+> ###### 省市区选择器：mode = region（最低版本：1.4.0）
+> * `value`	 表示选中的省市区，默认选中每一列的第一个值
+> * `custom-item`	 可为每一列的顶部添加一个自定义的项 1.5.0+
+> * `bindchange`	 改变时触发 change 事件，`event.detail = {value: value}`
+> * `bindcancel`	 取消选择时触发  1.9.90+
+> * `disabled`  false	是否禁用
+
+#####picker-view
+> * 嵌入页面的滚动选择器，自定义滚动选择器
+> * 由`<picker-view/>`和`<picker-view-column/>`构成
+> * `<picker-view/>`中仅可放置`<picker-view-column/>`，其他节点不会显示。`<picker-view-column/>`创造列,其孩子节点的高度会自动设置成与picker-view的选中框的高度一致
+> * 滚动时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
+> * `value`	 数组中的数字依次表示 picker-view 内的 picker-view-column 选择的第几项（下标从 0 开始），数字大于 picker-view-column 可选项长度时，选择最后一项。
+> * `indicator-style`	设置选择器中间选中框的样式
+> * `indicator-class`	 设置选择器中间选中框的类名	1.1.0
+> * `mask-style`	 设置蒙层的样式  1.5.0+
+> * `mask-class`	 设置蒙层的类名 1.5.0+
+> * `bindchange`	 当滚动选择，value 改变时触发 change 事件，`event.detail = {value: value}`；value为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项（下标从 0 开始）
+
+#####input
+> * `value` 输入框的初始内容
+> * `type`	 input 的类型
+>   * `text`	   文本输入键盘
+    * `number` 	数字输入键盘
+    * `idcard` 	身份证输入键盘
+    * `digit`	   带小数点的数字键盘
+> * `password`	 false	是否是密码类型，密码类型没有拼音，是字母和数字还有字符组成
+> * `placeholder` 输入框为空时占位符
+> * `placeholder-style` 指定 placeholder 的样式
+> * `placeholder-class` 指定 placeholder 的样式类,默认值`"input-placeholder"`
+> * `disabled`	 false	是否禁用
+> * `maxlength`	最大输入长度，设置为 -1 的时候不限制最大长度,默认值140
+> * `cursor-spacing` 指定光标与键盘的距离，单位 px 。取 input 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离
+> * `auto-focus`	 (即将废弃，请直接使用 focus )自动聚焦，拉起键盘
+> * `focus`	 false	获取焦点
+> * `confirm-type`	设置键盘右下角按钮的文字 1.1.0+ 默认值'done'
+>   * `send	`  右下角按钮为“发送”
+    * `search`	右下角按钮为“搜索”
+    * `next`	右下角按钮为“下一个”
+    * `go`	   右下角按钮为“前往”
+    * `done`	右下角按钮为“完成”
+> * `confirm-hold`	false	点击键盘右下角按钮时是否保持键盘不收起	1.1.0+
+> * `cursor`	指定focus时的光标位置  1.5.0+
+> * `selection-start`	光标起始位置，自动聚集时有效，需与selection-end搭配使用	1.9.0+
+> * `selection-end`	光标结束位置，自动聚集时有效，需与selection-start搭配使用	1.9.0+
+> * `adjust-position`	true	键盘弹起时，是否自动上推页面	1.9.90+
+> * `bindinput`	当键盘输入时，触发input事件，`event.detail = {value, cursor}`，处理函数可以直接 return 一个字符串，将替换输入框的内容。
+> * `bindfocus`	输入框聚焦时触发，`event.detail = { value, height }`，height 为键盘高度，在基础库 1.9.90 起支持
+> * `bindblur`	 输入框失去焦点时触发，`event.detail = {value: value}`
+> * `bindconfirm`	 点击完成按钮时触发，`event.detail = {value: value}`
+> * 微信版本 6.3.30, focus 属性设置无效；
+> * 微信版本 6.3.30, placeholder 在聚焦时出现重影问题；
+> * input 组件是一个 native 组件，字体是系统字体，**所以无法设置 font-family；**
+> * 在 input 聚焦期间，避免使用 css 动画；
+
+#####textarea
+> * 自闭和标签，值需要赋值给value属性，而不是被标签包裹
+> * `value`	 输入框的内容
+> * `placeholder`	 输入框为空时占位符
+> * `placeholder-style` 指定 placeholder 的样式
+> * `placeholder-class` 指定 placeholder 的样式类,默认值textarea-placeholder
+> * `disabled`	 false	是否禁用
+> * `maxlength`	 最大输入长度，设置为 -1 的时候不限制最大长度	,默认值140
+> * `auto-focus` false	自动聚焦，拉起键盘。
+> * `focus`	 false	获取焦点
+> * `auto-height`	 false	是否自动增高，**设置auto-height时，style.height不生效**
+> * `fixed` false	 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true
+> * `cursor-spacing`	 指定光标与键盘的距离，单位 px 。取 textarea 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离
+> * `cursor`	指定focus时的光标位置  1.5.0+
+> * `show-confirm-bar`	true	是否显示键盘上方带有”完成“按钮那一栏	1.6.0+
+> * `selection-start` 	-1	光标起始位置，自动聚集时有效，需与selection-end搭配使用	1.9.0+
+> * `selection-end`	 -1	光标结束位置，自动聚集时有效，需与selection-start搭配使	1.9.0+
+> * `adjust-position`	true	键盘弹起时，是否自动上推页面	1.9.90
+> * `bindfocus`	输入框聚焦时触发，`event.detail = { value, height }`，height 为键盘高度，在基础库 1.9.90 起支持
+> * `bindblur`	 输入框失去焦点时触发，`event.detail = {value, cursor}`
+> * `bindlinechange`	输入框行数变化时调用，`event.detail = {height: 0, heightRpx: 0, lineCount: 0}	`
+> * `bindinput	`	当键盘输入时，触发 input 事件，`event.detail = {value, cursor}`， **bindinput 处理函数的返回值并不会反映到 textarea 上**
+> * `bindconfirm`	 点击完成时， 触发 confirm 事件，`event.detail = {value: value}`
+
+#####button
+> * 当`<button/>`被`<form/>`包裹时，可以通过设置`form-type`属性触发表单对应的事件
 

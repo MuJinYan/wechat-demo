@@ -1,4 +1,19 @@
-<!--component.wxml-->
+<!--picker.wxml-->
+<view class="group">
+    <block wx:for="{{iconSize}}">
+        <icon type="success" size="{{item}}"/>
+    </block>
+</view>
+<view class="group">
+    <block wx:for="{{iconType}}">
+        <icon type="{{item}}" size="40"/>
+    </block>
+</view>
+<view class="group">
+    <block wx:for="{{iconColor}}">
+        <icon type="success" size="40" color="{{item}}"/>
+    </block>
+</view>
 <view class="customSwiper">
     <!--轮播图-->
     <swiper class="banner"
@@ -31,8 +46,10 @@
         bindscroll="scroll"
         bindscrolltolower="scrollToLower"
         bindscrolltoupper="scrollToUpper"
-        scroll-y="true"
+        scroll-y
         scroll-top="{{scrollTop}}"
+        enable-back-to-top
+        scroll-with-animation
 >
     <view id="item-1" class="scroll-item bg-red">1</view>
     <view id="item-2" class="scroll-item bg-blue">2</view>
@@ -45,3 +62,65 @@
     <button bindtap="scrollToTop">点击滚动到顶部</button>
 </view>
 
+<!--input.wxml-->
+<view class="section">
+    <input placeholder="这是一个可以自动聚焦的input" auto-focus/>
+</view>
+<view class="section">
+    <input placeholder="这个只有在按钮点击的时候才聚焦" focus="{{focus}}" />
+    <view class="btn-area">
+        <button bindtap="bindButtonTap">使得输入框获取焦点</button>
+    </view>
+</view>
+<view class="section">
+    <input  maxlength="10" placeholder="最大输入长度10" />
+</view>
+<view class="section">
+    <view class="section__title">你输入的是：{{inputValue}}</view>
+    <input  bindinput="bindKeyInput" placeholder="输入同步到view中"/>
+</view>
+
+
+<view class="section">
+    <input  bindinput="bindReplaceInput" placeholder="连续的两个1会变成2" />
+</view>
+
+
+<view class="section">
+    <input password type="number" />
+</view>
+<view class="section">
+    <input password type="text" />
+</view>
+<view class="section">
+    <input type="digit" placeholder="带小数点的数字键盘"/>
+</view>
+<view class="section">
+    <input type="idcard" placeholder="身份证输入键盘" />
+</view>
+<view class="section">
+    <input placeholder-style="color:red" placeholder="占位符字体是红色的" />
+</view>
+
+<!--textarea.wxml-->
+<view class="section">
+    <textarea bindblur="bindTextAreaBlur" auto-height placeholder="自动变高" />
+</view>
+<view class="section">
+    <textarea placeholder="placeholder颜色是红色的" placeholder-style="color:red;"  />
+</view>
+<view class="section">
+    <textarea placeholder="这是一个可以自动聚焦的textarea" auto-focus />
+</view>
+<view class="section">
+    <textarea placeholder="这个只有在按钮点击的时候才聚焦" focus="{{focus}}" />
+    <view class="btn-area">
+        <button bindtap="bindButtonTap">使得输入框获取焦点</button>
+    </view>
+</view>
+<view class="section">
+    <form bindsubmit="bindFormSubmit">
+        <textarea placeholder="form 中的 textarea" name="textarea"/>
+        <button form-type="submit"> 提交 </button>
+    </form>
+</view>
