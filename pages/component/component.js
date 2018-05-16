@@ -2,7 +2,7 @@ Page({
   data: {
 
   },
-
+  // 跳转到各组件对应路由
   goFormPage: function () {
     wx.navigateTo({url:'/pages/form/form'})
   },
@@ -26,5 +26,8 @@ Page({
   },
   goScrollViewPage: function () {
     wx.navigateTo({url:'/pages/scrollView/scrollView'})
+  },
+  goNavigatorPage: function () {
+    wx.navigateTo({url:'/pages/navigator/navigator'})
   }
 })

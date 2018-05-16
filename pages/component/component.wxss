@@ -1,32 +1,9 @@
-/**component.wxss**/
-.scroll-container{
-  border: 1px solid;
-  height: 800rpx;
-}
-.scroll-container .scroll-item{
-  height: 300rpx;
-  width: 120%;
-}
-.bg-blue{
-  background-color: #87CEFA;
-}
-.bg-red{
-  background-color: #FF6347;
-}
-.bg-green{
-  background-color: #43CD80;
-}
-.act{
-  padding: 10px;
-}
-
-
-/** wxss **/
-/** 修改button默认的点击态样式类,覆盖默认button-hover**/
-.button-hover {
-  background-color: red;
-}
-/** 添加自定义button点击态样式类**/
-.other-button-hover {
-  background-color: blue;
+button[size=mini]{
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

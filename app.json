@@ -10,7 +10,10 @@
     "pages/button/button",
     "pages/input/input",
     "pages/textarea/textarea",
-    "pages/scrollView/scrollView"
+    "pages/scrollView/scrollView",
+    "pages/navigator/navigator",
+    "pages/navigate/navigate",
+    "pages/redirect/redirect"
   ],
   "window":{
     "backgroundTextStyle":"dark",

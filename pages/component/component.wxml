@@ -1,8 +1,14 @@
-<button bindtap="goPickerPage">跳转到picker页面</button>
-<button bindtap="goFormPage">跳转到表单页</button>
-<button bindtap="goIconsPage">跳转到icons页面</button>
-<button bindtap="goSliderPage">跳转到slider页面</button>
-<button bindtap="goButtonPage">跳转到button页面</button>
-<button bindtap="goInputPage">跳转到input页面</button>
-<button bindtap="goTextareaPage">跳转到textarea页面</button>
-<button bindtap="goScrollViewPage">跳转到scrollView页面</button>
+
+
+
+
+
+<button bindtap="goNavigatorPage" size="mini">跳转到navigator页面</button>
+<button bindtap="goFormPage" size="mini">跳转到form页</button>
+<button bindtap="goButtonPage" size="mini">跳转到button页面</button>
+<button bindtap="goTextareaPage" size="mini">跳转到textarea页面</button>
+<button bindtap="goInputPage" size="mini">跳转到input页面</button>
+<button bindtap="goPickerPage" size="mini">跳转到picker页面</button>
+<button bindtap="goIconsPage" size="mini">跳转到icons页面</button>
+<button bindtap="goSliderPage" size="mini">跳转到slider页面</button>
+<button bindtap="goScrollViewPage" size="mini">跳转到scrollView页面</button>
