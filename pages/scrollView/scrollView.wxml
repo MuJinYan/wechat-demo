@@ -1,0 +1,23 @@
+<scroll-view
+        class="scroll-container"
+        upper-threshold="0"
+        lower-threshol="100"
+        scroll-into-view="{{toView}}"
+        bindscroll="scroll"
+        bindscrolltolower="scrollToLower"
+        bindscrolltoupper="scrollToUpper"
+        scroll-y
+        scroll-top="{{scrollTop}}"
+        enable-back-to-top
+        scroll-with-animation
+>
+    <view id="item-1" class="scroll-item bg-red">1</view>
+    <view id="item-2" class="scroll-item bg-blue">2</view>
+    <view id="item-3" class="scroll-item bg-red">3</view>
+    <view id="item-4" class="scroll-item bg-blue">4</view>
+    <view id="item-5" class="scroll-item bg-red">5</view>
+    <view id="item-6" class="scroll-item bg-blue">6</view>
+</scroll-view>
+<view class="act">
+    <button bindtap="scrollToTop">点击滚动到顶部</button>
+</view>

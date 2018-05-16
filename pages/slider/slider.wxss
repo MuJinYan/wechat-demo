@@ -1,0 +1,43 @@
+.banner{
+  height: 400px;
+  background-color: #ddd;
+}
+.customSwiper{
+  height: 379.5rpx;
+  position: relative;
+}
+.customSwiper swiper{
+  height: 100%;
+}
+.bg-blue{
+  background-color: #87CEFA;
+}
+.bg-red{
+  background-color: #FF6347;
+}
+.bg-green{
+  background-color: #43CD80;
+}
+.tab{
+  height: 70rpx;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.tab .tan-item{
+  background-color: #ccc;
+  height: 50rpx;
+  width: 50rpx;
+  line-height: 50rpx;
+  font-size: 12rpx;
+  color: #fff;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.tab .tab-item-selected{
+  background-color: red;
+}

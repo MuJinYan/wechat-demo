@@ -1,4 +1,3 @@
-/**component.wxss**/
 .scroll-container{
   border: 1px solid;
   height: 800rpx;
@@ -18,15 +17,4 @@
 }
 .act{
   padding: 10px;
-}
-
-
-/** wxss **/
-/** 修改button默认的点击态样式类,覆盖默认button-hover**/
-.button-hover {
-  background-color: red;
-}
-/** 添加自定义button点击态样式类**/
-.other-button-hover {
-  background-color: blue;
 }

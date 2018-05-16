@@ -1,0 +1,24 @@
+<view class="customSwiper">
+    <!--轮播图-->
+    <swiper class="banner"
+            autoplay="{{autoplay}}"
+            circular="true"
+            current="0"
+            interval="2000"
+            duration="300"
+            bindchange="switchTab">
+        <block wx:for="{{sliderList}}">
+            <swiper-item class="{{item.className}}">{{item.name}}</swiper-item>
+        </block>
+    </swiper>
+    <!--轮播图面板-->
+    <view class="tab">
+        <block wx:for="{{sliderList}}">
+            <view wx:if="{{item.selected}}" class="tab-item-selected">{{index+1}}</view>
+            <view wx:else class="tab-item">{{index+1}}</view>
+        </block>
+    </view>
+</view>
+<view>
+    <button bindtap="play">暂停 | 播放</button>
+</view>

@@ -1,9 +1,16 @@
 {
   "pages":[
     "pages/component/component",
-    "pages/picker/picker",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/form/form",
+    "pages/picker/picker",
+    "pages/icons/icons",
+    "pages/slider/slider",
+    "pages/button/button",
+    "pages/input/input",
+    "pages/textarea/textarea",
+    "pages/scrollView/scrollView"
   ],
   "window":{
     "backgroundTextStyle":"dark",
@@ -29,11 +36,8 @@
       },{
         "text":"日志",
         "pagePath":"pages/logs/logs"
-      },{
-        "text":"picker",
-        "pagePath":"pages/picker/picker"
       }
     ]
   },
-  "debug":true
+  "debug":false
 }
