@@ -13,7 +13,11 @@
     "pages/scrollView/scrollView",
     "pages/navigator/navigator",
     "pages/navigate/navigate",
-    "pages/redirect/redirect"
+    "pages/redirect/redirect",
+    "pages/image/image",
+    "pages/audio/audio",
+    "pages/video/video",
+    "pages/camera/camera"
   ],
   "window":{
     "backgroundTextStyle":"dark",

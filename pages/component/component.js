@@ -29,5 +29,17 @@ Page({
   },
   goNavigatorPage: function () {
     wx.navigateTo({url:'/pages/navigator/navigator'})
+  },
+  goImagePage: function () {
+    wx.navigateTo({url:'/pages/image/image'})
+  },
+  goAudioPage: function () {
+    wx.navigateTo({url:'/pages/audio/audio'})
+  },
+  goVideoPage: function () {
+    wx.navigateTo({url:'/pages/video/video'})
+  },
+  goCameraPage: function () {
+    wx.navigateTo({url:'/pages/camera/camera'})
   }
 })

@@ -3,6 +3,12 @@
 
 
 
+
+
+<button bindtap="goCameraPage" size="mini">跳转到camera页面</button>
+<button bindtap="goVideoPage" size="mini">跳转到video页面</button>
+<button bindtap="goAudioPage" size="mini">跳转到audio页面</button>
+<button bindtap="goImagePage" size="mini">跳转到image页面</button>
 <button bindtap="goNavigatorPage" size="mini">跳转到navigator页面</button>
 <button bindtap="goFormPage" size="mini">跳转到form页</button>
 <button bindtap="goButtonPage" size="mini">跳转到button页面</button>

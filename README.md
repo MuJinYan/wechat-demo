@@ -219,7 +219,7 @@ touch 用户划动引起swiper变化；
 > * `type` icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear
 > * `size` icon的大小，单位px `size="40"`并不用写px
 > * `color` icon的颜色，同css的color
-> * 自定义`<icon/>`组件 使用雪碧图的方式进行实现，也就是`background-image`和`background-position`进行组合实现
+> * 自定义`<icon/>`组件 使用雪碧图的方式进行实现，也就是`background-resources`和`background-position`进行组合实现
 
 ##### text
 > * 用于文本内容的展示。只有`<text/>`节点内部的内容能被长按选中
@@ -439,7 +439,7 @@ touch 用户划动引起swiper变化；
 > * `button-hover` 默认为`{background-color: rgba(0, 0, 0, 0.1); opacity: 0.7;}`
 > * `bindgetphonenumber` 从1.2.0 开始支持，但是在1.5.3以下版本中无法使用wx.canIUse进行检测，建议使用基础库版本进行判断。
 > * 在`bindgetphonenumber` 等返回加密信息的回调中调用 `wx.login `登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态。
-> *  `<button><image src=""/></button>`可以这样写嵌套多媒体的自定义按钮
+> *  `<button><resources src=""/></button>`可以这样写嵌套多媒体的自定义按钮
 
 ##### form
 > * 表单，将组件内的用户输入的`<switch/>` `<input/>` `<checkbox/>` `<slider/>` `<radio/>` `<picker/>` 提交。
