@@ -219,7 +219,7 @@ touch 用户划动引起swiper变化；
 > * `type` icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear
 > * `size` icon的大小，单位px `size="40"`并不用写px
 > * `color` icon的颜色，同css的color
-> * 自定义`<icon/>`组件 使用雪碧图的方式进行实现，也就是`background-resources`和`background-position`进行组合实现
+> * 自定义`<icon/>`组件 使用雪碧图的方式进行实现，也就是`background-image`和`background-position`进行组合实现
 
 ##### text
 > * 用于文本内容的展示。只有`<text/>`节点内部的内容能被长按选中
@@ -439,7 +439,7 @@ touch 用户划动引起swiper变化；
 > * `button-hover` 默认为`{background-color: rgba(0, 0, 0, 0.1); opacity: 0.7;}`
 > * `bindgetphonenumber` 从1.2.0 开始支持，但是在1.5.3以下版本中无法使用wx.canIUse进行检测，建议使用基础库版本进行判断。
 > * 在`bindgetphonenumber` 等返回加密信息的回调中调用 `wx.login `登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态。
-> *  `<button><resources src=""/></button>`可以这样写嵌套多媒体的自定义按钮
+> *  `<button><image src=""/></button>`可以这样写嵌套多媒体的自定义按钮
 
 ##### form
 > * 表单，将组件内的用户输入的`<switch/>` `<input/>` `<checkbox/>` `<slider/>` `<radio/>` `<picker/>` 提交。
@@ -464,6 +464,82 @@ touch 用户划动引起swiper变化；
 > * `hover-stay-time`	手指松开后点击态保留时间，单位毫秒
 > * `navigator-hover` 默认为 `{background-color: rgba(0, 0, 0, 0.1); opacity: 0.7;}`, <navigator/> 的子节点背景色应为透明色
 
+#### image
+> * 默认宽度300px、高度225px
+> * `src	`  图片资源地址
+> * `mode`	默认值：'scaleToFill'	图片裁剪、缩放的模式
+>   * `scaleToFill` 不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素
+>   * `aspectFit`  保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
+>   * `aspectFill` 	保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取。
+>   * `widthFix`	宽度不变，高度自动变化，保持原图宽高比不变
+>   * `top` 	不缩放图片，只显示图片的顶部区域
+>   * `bottom`	 不缩放图片，只显示图片的底部区域
+>   * `center`	 不缩放图片，只显示图片的中间区域
+>   * `left	` 不缩放图片，只显示图片的左边区域
+>   * `right`	 不缩放图片，只显示图片的右边区域
+>   * `top left`	 不缩放图片，只显示图片的左上边区域
+>   * `top right` 	不缩放图片，只显示图片的右上边区域
+>   * `bottom left`	 不缩放图片，只显示图片的左下边区域
+>   * `bottom right`	不缩放图片，只显示图片的右下边区域
+> * `lazy-load` false	图片懒加载。只针对page与scroll-view下的image有效	1.5.0
+> * `binderror`	当错误发生时，发布到 AppService 的事件名，事件对象`event.detail = {errMsg: 'something wrong'}`
+> * `bindload`	  当图片载入完毕时，发布到 AppService 的事件名，事件对象`event.detail = {height:'图片高度px', width:'图片宽度px'}`
 
+#### audio(不建议使用，从1.6.0不在维护)
+> * 1.6.0 版本开始，该组件不再维护。**建议使用能力更强的 `wx.createInnerAudioContext` 接口**
+> * `id`  audio 组件的唯一标识符
+> * `src`	 要播放音频的资源地址
+> * `loop`	 false	是否循环播放
+> * `controls` false	是否显示默认控件
+> * `poster`	默认控件上的音频封面的图片资源地址，如果 controls 属性值为 false 则设置 poster 无效
+> * `name`	默认控件上的音频名字，如果 controls 属性值为 false 则设置 name 无效
+> * `author`	默认控件上的作者名字，如果 controls 属性值为 false 则设置 author 无效
+>   * 1--获取资源被用户禁止，2--网络错误，3	--解码错误，4--不合适资源
+> * `binderror`	当发生错误时触发 error 事件，`detail = {errMsg: MediaError.code}`
+> * `bindplay`  当开始/继续播放时触发play事件
+> * `bindpause`	当暂停播放时触发 pause 事件
+> * `bindtimeupdate` 当播放进度改变时触发 timeupdate 事件，`detail = {currentTime, duration}`
+> * `bindended	`	当播放到末尾时触发 ended 事件
 
+#### video
+> * `<video />` 默认宽度300px、高度225px，可通过wxss设置宽高。
+> * `src`	要播放视频的资源地址
+> * `initial-time`	指定视频初始播放位置 1.6.0
+> * `duration`	 指定视频时长	1.1.0
+> * `controls`	  true	是否显示默认播放控件（播放/暂停按钮、播放进度、时间）
+> * `danmu-list`	Object Array 弹幕列表
+> * `danmu-btn`	false	是否显示弹幕按钮，只在初始化时有效，不能动态变更
+> * `enable-danmu`	false	是否展示弹幕，只在初始化时有效，不能动态变更
+> * `autoplay`	 false	是否自动播放
+> * `loop`	false	是否循环播放	1.4.0
+> * `muted`	 false	是否静音播放	1.4.0
+> * `page-gesture	`  false	在非全屏模式下，是否开启亮度与音量调节手势	1.6.0
+> * `direction`	设置全屏时视频的方向，不指定则根据宽高比自动判断。有效值为 0（正常竖向）, 90（屏幕逆时针90度）, -90（屏幕顺时针90度）	1.7.0
+> * `show-progress`	 true	若不设置，宽度大于240时才会显示	1.9.0
+> * `show-fullscreen-btn`	true	是否显示全屏按钮	1.9.0
+> * `show-play-btn`	true	是否显示视频底部控制栏的播放按钮	1.9.0
+> * `show-center-play-btn`	true	是否显示视频中间的播放按钮	1.9.0
+> * `enable-progress-gesture` true	是否开启控制进度的手势	1.9.0
+> * `objectFit`	当视频大小与 video 容器大小不一致时，视频的表现形式。contain：包含，fill：填充，cover：覆盖
+> * `poster`	视频封面的图片网络资源地址，如果 controls 属性值为 false 则设置 poster 无效
+> * `bindplay` 当开始/继续播放时触发play事件
+> * `bindpause`	当暂停播放时触发 pause 事件
+> * `bindended	`	当播放到末尾时触发 ended 事件
+> * `bindtimeupdate` 播放进度变化时触发，`event.detail = {currentTime, duration}`。触发频率 250ms 一次
+> * `bindfullscreenchange` 当视频进入和退出全屏是触发，`event.detail = {fullScreen, direction}`，direction取为 vertical 或 horizontal	 1.4.0
+> * `bindwaiting` 	视频出现缓冲时触发 1.7.0
+> * `binderror`	视频播放出错时触发 1.7.0
+> * video 组件是由客户端创建的原生组件，它的层级是最高的，不能通过 z-index 控制层级。
+> * 请勿在 `scroll-view`、`swiper`、`picker-view`、`movable-view` 中使用 video 组件。
+> * css 动画对 video 组件无效。
+
+#### camera(相关api：wx.createCameraContext)
+> * 需要用户授权 scope.camera
+> * `device-position` 	back	前置或后置，值为front, back
+> * `flash`	auto	闪光灯，值为auto, on, off
+> * `bindstop`	  摄像头在非正常终止时触发，如退出后台等情况
+> * `binderror	`	用户不允许使用摄像头时
+> * camera 组件是由客户端创建的原生组件，它的层级是最高的，不能通过 z-index 控制层级。可使用 cover-view cover-image覆盖在上面。
+> * 同一页面只能插入一个 camera 组件。
+> * 请勿在 `scroll-view`、`swiper`、`picker-view`、`movable-view` 中使用 camera 组件。
 
