@@ -1,10 +1,4 @@
-
-
-
-
-
-
-
+<button bindtap="goMapPage" size="mini">跳转到map页面</button>
 <button bindtap="goCameraPage" size="mini">跳转到camera页面</button>
 <button bindtap="goVideoPage" size="mini">跳转到video页面</button>
 <button bindtap="goAudioPage" size="mini">跳转到audio页面</button>

@@ -17,7 +17,8 @@
     "pages/image/image",
     "pages/audio/audio",
     "pages/video/video",
-    "pages/camera/camera"
+    "pages/camera/camera",
+    "pages/map/map"
   ],
   "window":{
     "backgroundTextStyle":"dark",

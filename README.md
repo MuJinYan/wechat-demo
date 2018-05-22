@@ -543,3 +543,91 @@ touch 用户划动引起swiper变化；
 > * 同一页面只能插入一个 camera 组件。
 > * 请勿在 `scroll-view`、`swiper`、`picker-view`、`movable-view` 中使用 camera 组件。
 
+### map
+> * 地图组件的经纬度必填, 如果不填经纬度则默认值是北京的经纬度。
+> * `longitude`	中心经度
+> * `latitude`	  中心纬度
+> * `scale`	  缩放级别，取值范围为5-18 默认16
+> * `markers`	 标记点
+>   * `id`	marker点击事件回调会返回此id。建议为每个marker设置上Number类型id，保证更新marker时有更好的性能。
+>   * `latitude`	浮点数，范围 -90 ~ 90
+>   * `longitude`	 浮点数，范围 -180 ~ 180
+>   * `title`	标注点名
+>   * `iconPath`	显示的图标  项目目录下的图片路径，支持相对路径写法，以'/'开头则表示相对小程序根目录；也支持临时路径
+>   * `rotate` 	旋转角度  顺时针旋转的角度，范围 0 ~ 360，默认为 0
+>   * `alpha`	标注的透明度	默认1，无透明，范围 0 ~ 1
+>   * `width`	标注图标宽度	默认为图片实际宽度
+>   * `height`	标注图标高度	默认为图片实际高度
+>   * `callout	` 自定义标记点上方的气泡窗口  可识别换行符。	1.2.0
+>     `content` 	文本 	1.2.0
+      `color`	文本颜色	1.2.0
+      `fontSize`	文字大小 	1.2.0
+      `borderRadius`	callout边框圆角 1.2.0
+      `bgColor	` 背景色	1.2.0
+      `padding`	文本边缘留白	1.2.0
+      `display`	'BYCLICK':点击显示; 'ALWAYS':常显  1.2.0
+      `textAlign` 	文本对齐方式。有效值: left, right, center 1.6.0
+>   * `label`	为标记点旁边增加标签  可识别换行符。	1.2.0
+>     `content	`  1.2.0
+      `color`	文本颜色	1.2.0
+      `fontSize`	文字大小	1.2.0
+      `x`	label的坐标，原点是 marker 对应的经纬度 1.2.0
+      `y`	label的坐标，原点是 marker 对应的经纬度 1.2.0
+      `borderWidth`	边框宽度 	1.6.0
+      `borderColor`	边框颜色	1.6.0
+      `borderRadius`	边框圆	1.6.0
+      `bgColor`	背景色	1.6.0
+      `padding`	文本边缘留白	1.6.0
+      `textAlign`	文本对齐方式。有效值: left, right, center 1.6.0
+>   * `anchor`	经纬度在标注图标的锚点，默认底边中点	`{x, y}`，x表示横向(0-1)，y表示竖向(0-1)。{x: .5, y: 1} 表示底边中点	1.2.0
+> * `covers`	即将移除，请使用 markers
+> * `polyline` 路线	 指定一系列坐标点，从数组第一项连线至最后一项
+>   `points`	经纬度数组	Array	是	`[{latitude: 0, longitude: 0}]`
+  `color`	线的颜色	8位十六进制表示，后两位表示alpha值，如：#000000AA
+  `width`	线的宽度
+  `dottedLine`	 是否虚线	默认false
+  `arrowLine`	带箭头的线	 默认false，开发者工具暂不支持该属性	1.2.0
+  `arrowIconPath` 	更换箭头图标 在arrowLine为true时生效	1.6.0
+  `borderColor`	线的边框颜色	1.2.0
+  `borderWidth	` 线的厚度	1.2.0
+> * `circles`	 圆	  在地图上显示圆
+>   `latitude`	纬度	浮点数，范围 -90 ~ 90
+    `longitude` 	经度		浮点数，范围 -180 ~ 180
+    `color`	描边的颜色		8位十六进制表示，后两位表示alpha值，如：#000000AA
+    `fillColor`	填充颜色	8位十六进制表示，后两位表示alpha值，如：#000000AA
+    `radius	` 半径
+    `strokeWidth`	 描边的宽度
+> * `controls`	  控件
+>   * `id`	控件id	 在控件点击事件回调会返回此id
+>   * `position`	控件在地图的位置 控件相对地图位置
+>     `left`	距离地图的左边界多远 默认为0
+      `top`	 距离地图的上边界多远 默认为0
+      `width`	控件宽度 默认为图片宽度
+      `height`	控件高度 默认为图片高度
+>   * `iconPath`	显示的图标  	项目目录下的图片路径，支持相对路径写法，以'/'开头则表示相对小程序根目录；也支持临时路径
+>   * `clickable` 	是否可点击	 默认不可点击
+> * `include-points`	缩放视野以包含所有给定的坐标点
+> * `show-location`	Boolean	显示带有方向的当前定位点
+> * `bindmarkertap`	点击标记点时触发
+> * `bindcallouttap`	点击标记点对应的气泡时触发	1.2.0
+> * `bindcontroltap`	点击控件时触发
+> * `bindregionchange`		视野发生变化时触发
+> * `bindtap`	 点击地图时触发
+> * `bindupdated`		在地图渲染更新完成时触发	1.6.0
+
+### canvas
+> * **canvas 标签默认宽度300px、高度225px**
+> * **同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作**
+> * `canvas-id`	canvas 组件的唯一标识符
+> * `disable-scroll`	false	当在 canvas 中移动时且有绑定手势事件时，禁止屏幕滚动以及下拉刷新
+> * `bindtouchstart`	手指触摸动作开始
+> * `bindtouchmove`	 手指触摸后移动
+> * `bindtouchend`	手指触摸动作结束
+> * `bindtouchcancel`	手指触摸动作被打断，如来电提醒，弹窗
+> * `bindlongtap` 手指长按 500ms 之后触发，触发了长按事件后进行移动不会触发屏幕的滚动
+> * `binderror`	当发生错误时触发 error 事件，`detail = {errMsg: 'something wrong'}`
+> * canvas 组件是由客户端创建的原生组件，它的层级是最高的，不能通过 z-index 控制层级。
+> * 请勿在 `scroll-view`、`swiper`、`picker-view`、`movable-view` 中使用 canvas 组件。
+> * css 动画对 canvas 组件无效。
+> * 避免设置过大的宽高，在安卓下会有crash的问题
+

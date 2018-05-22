@@ -41,5 +41,8 @@ Page({
   },
   goCameraPage: function () {
     wx.navigateTo({url:'/pages/camera/camera'})
+  },
+  goMapPage: function () {
+    wx.navigateTo({url:'/pages/map/map'})
   }
 })
